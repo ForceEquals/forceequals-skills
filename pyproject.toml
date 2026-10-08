@@ -14,3 +14,6 @@ forceequals-skills = "forceequals_skills:main"
 
 [tool.setuptools.packages.find]
 include = ["forceequals_skills*"]
+
+[tool.setuptools.package-data]
+forceequals_skills = ["SKILL.md"]

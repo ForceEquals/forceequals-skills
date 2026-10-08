@@ -11,10 +11,14 @@ SKILL_FILE = "SKILL.md"
 
 
 def skill_source() -> Path:
+    root = Path(__file__).resolve().parents[1]
+    repo_copy = root / "skills" / SKILL_NAME / SKILL_FILE
+    if (root / "pyproject.toml").is_file() and repo_copy.is_file():
+        return repo_copy
     packaged = Path(__file__).resolve().parent / SKILL_FILE
     if packaged.is_file():
         return packaged
-    return Path(__file__).resolve().parents[1] / "skills" / SKILL_NAME / SKILL_FILE
+    return repo_copy
 
 
 def skill_directory(env: dict | None = None) -> str:
