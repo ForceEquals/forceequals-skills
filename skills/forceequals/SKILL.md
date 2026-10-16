@@ -48,7 +48,7 @@ Inside the in-scope paths, find every action that changes something outside the 
 
 Search for sends, posts, publishes, merges, deploys, refunds, payments, payouts, transfers, charges, deletes, drops, grants, invites, role changes, writes, inserts, upserts, creates, updates, cancels, notifies, and dispatches. Include HTTP clients and vendor SDKs that do those things: mail, chat, git, payments, CRM, identity, database, cloud provisioning.
 
-Do not rely on names alone. Real code calls `_dispatch(payload)`, `self.client.execute(action)`, or `handler.run(req)`. Read the function to see what it actually does. Follow calls two hops deep inside the project. Do not follow into site-packages or node_modules.
+Do not rely on names alone. Real code calls `_dispatch(payload)`, `self.client.execute(action)`, or `handler.run(req)`. Read the function to see what it actually does. The repository may be Go, Java, Python, or any other language. Follow calls two hops deep inside the project. Do not follow into dependency folders such as node_modules, vendor, or site-packages.
 
 Classify each action:
 
@@ -102,19 +102,18 @@ Never state that a repository is compliant, clean, or fully governed. The strong
 
 ## Output
 
-Write `governance-gaps.json` as **readable JSON**. The user must be able to open it, read every finding, and see exactly what would be sent before they send it. Do not encrypt, pack, seal, or obscure the file. Do not run any packaging command.
+Write `governance-gaps.json` in the repository root. It is plain JSON a person can open. Do not lock it, do not encrypt it, and do not write a draft file. Do not run a seal script. Do not install or run the ForceEquals SDK.
 
-**Do not include source code in the file.** Record `file`, `startLine`, `endLine`, and `symbol` so the finding can be located, and describe what you saw in `evidence` in your own words. The user's source stays on the user's machine.
+**Do not include source code.** Record `file`, `startLine`, `endLine`, and `symbol` so the finding can be located, and describe what you saw in `evidence` in your own words. The user's source stays on the user's machine.
 
-Only if the user explicitly asks for code to be included ("include the code", "include snippets") add a `code` field to each finding and set `"includesSource": true` at the top level, so the file states plainly that it carries source.
+Only if the user explicitly asks for code to be included ("include the code", "include snippets") add a `code` field to each finding and set `"includesSource": true` at the top level.
 
-Also write a short readable summary to the chat: the headline count, the critical findings, and the coverage line. Then tell the user the file path, and that it uploads in Momentum under Governance Scanner for the full report, the policy pack, and the Policy Studio import.
+Also write a short readable summary to the chat: the headline count, the critical findings, and the coverage line. Do not paste the whole file into the chat. Then tell the user the file path, and that it uploads in Momentum under Governance Scanner for the full report, the policy pack, and the Policy Studio import.
 
 ```json
 {
-  "schemaVersion": "1.0",
   "repo": "repository-name",
-  "includesSource": false,
+  "scannedAt": "2026-10-10T00:00:00.000Z",
   "summary": "One sentence on what can happen with no person in the path.",
   "coverage": {
     "filesScanned": 0,
@@ -145,7 +144,7 @@ Also write a short readable summary to the chat: the headline count, the critica
         "no record of who decided"
       ],
       "blastRadius": "Customer funds. One execution moves money and cannot be reversed from inside the system.",
-      "remediation": "Emit a refund.requested event carrying the customer and amount, call request_approval, and call the payments client only after an approval returns Approve. Wrap the function so each ticket is one governed case.",
+      "recommendation": "Emit a refund.requested event carrying the customer and amount, call request_approval, and call the payments client only after an approval returns Approve. Wrap the function so each ticket is one governed case.",
       "policy": {
         "name": "Pause a refund before it sends",
         "when": "The agent is about to pay a refund, with the customer id and amount",
@@ -161,8 +160,8 @@ Also write a short readable summary to the chat: the headline count, the critica
 `actionType` is `irreversible` or `reversible`.
 `agencyEvidence` is required: it is how you establish the action belongs to an agent. Without it the finding is out of scope.
 `blastRadius` names what is affected in one sentence: money, customer trust, access, data, infrastructure.
-`remediation` is the code change, and may name ForceEquals.
-`policy` is the rule to save in Policy Studio, and must not restate the remediation.
+`recommendation` is the code change, and may name ForceEquals.
+`policy` is the rule to save in Policy Studio, and must not restate the recommendation.
 
 Policy fields:
 
@@ -172,3 +171,7 @@ Policy fields:
 - `route` — `human` when a person must approve, `escalate` when a named role must, `reject` when the action must not run at all, `allow` only when the gap is a missing record and the action may continue once that record is stored
 
 Write one policy per finding. Never one generic rule for the repository.
+
+## Finish
+
+`governance-gaps.json` must be plain JSON a person can open. It must contain `repo`, `scannedAt`, `summary`, and `gaps`. Do not lock it. Do not leave `governance-gaps.draft.json`. If a locked file was written, delete it and write the readable JSON instead.

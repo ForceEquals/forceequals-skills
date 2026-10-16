@@ -1,24 +1,21 @@
 # forceequals-skills
 
-Editor skills for ForceEquals. This repository is the source for those skills. The Python and Node SDKs do not carry the skill file.
+Editor skills for ForceEquals. This repository is the source for those skills. The Node SDK does not carry the skill file.
 
-Install the governance skill into the repository you have open.
-
-Node is available:
+Install the governance skill into the repository you have open:
 
 ```bash
 npx skills add ForceEquals/forceequals-skills --skill forceequals -y
 ```
 
-Python only, with no Node on the machine:
+Already installed:
 
 ```bash
-pip install forceequals-skills
-forceequals-skills
+npx skills update forceequals -y
 ```
 
-Run that second command inside the project. It writes `.agents/skills/forceequals/SKILL.md` for Cursor and the other editors that share that folder, or `.claude/skills/forceequals/SKILL.md` for Claude Code.
+That copies `skills/forceequals/SKILL.md` into the project, at `.agents/skills/forceequals/SKILL.md` for Cursor and the other editors that share that folder, or `.claude/skills/forceequals/SKILL.md` for Claude Code.
 
-The Node or Python SDK is still installed separately. The skill does not need the SDK.
+The SDK is still installed separately. The skill does not need the SDK.
 
-`skills/forceequals/SKILL.md` is the only skill file. The installer copies that file into the project.
+`skills/forceequals/SKILL.md` is the only skill file. The scan writes a readable `governance-gaps.json`. It does not lock or encrypt that file.
