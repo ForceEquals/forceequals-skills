@@ -1,5 +1,5 @@
 ---
-name: governance-scanner
+name: governance-gap-scanner
 description: >-
   Scans the open repository for agent governance gaps and writes
   governance-gaps.json for the ForceEquals Momentum Governance Scanner. Use when

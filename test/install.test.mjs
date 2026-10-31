@@ -5,11 +5,11 @@ import path from "node:path";
 import { installSkill, skillDirectory, skillSourcePath } from "../install.mjs";
 
 const source = fs.readFileSync(skillSourcePath(), "utf8");
-assert.match(source, /^---\r?\nname: governance-scanner\r?\n/);
+assert.match(source, /^---\r?\nname: governance-gap-scanner\r?\n/);
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), "fe-skill-"));
-const dest = path.join(root, ".agents", "skills", "governance-scanner", "SKILL.md");
-const claudeDest = path.join(root, ".claude", "skills", "governance-scanner", "SKILL.md");
+const dest = path.join(root, ".agents", "skills", "governance-gap-scanner", "SKILL.md");
+const claudeDest = path.join(root, ".claude", "skills", "governance-gap-scanner", "SKILL.md");
 
 const editorEnv = {};
 assert.equal(skillDirectory(editorEnv), ".agents");
@@ -37,7 +37,7 @@ assert.equal(fs.readFileSync(dest, "utf8"), source);
 const claudeRoot = fs.mkdtempSync(path.join(os.tmpdir(), "fe-skill-claude-"));
 const claudeOnly = installSkill({ cwd: claudeRoot, env: { CLAUDECODE: "1" } });
 assert.equal(claudeOnly.status, "installed");
-assert.equal(fs.existsSync(path.join(claudeRoot, ".agents", "skills", "governance-scanner", "SKILL.md")), false);
-assert.equal(fs.readFileSync(path.join(claudeRoot, ".claude", "skills", "governance-scanner", "SKILL.md"), "utf8"), source);
+assert.equal(fs.existsSync(path.join(claudeRoot, ".agents", "skills", "governance-gap-scanner", "SKILL.md")), false);
+assert.equal(fs.readFileSync(path.join(claudeRoot, ".claude", "skills", "governance-gap-scanner", "SKILL.md"), "utf8"), source);
 
 console.log("skill install ok");
