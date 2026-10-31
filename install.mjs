@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 
-const SKILL_NAME = "governance-scanner";
+const SKILL_NAME = "governance-gap-scanner";
 const SKILL_FILE = "SKILL.md";
 
 export function skillSourcePath() {
