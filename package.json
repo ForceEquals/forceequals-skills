@@ -1,0 +1,14 @@
+{
+  "name": "forceequals-skills",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ForceEquals editor skills. Installs the governance skill into the current repository.",
+  "bin": {
+    "forceequals-skills": "./install.mjs"
+  },
+  "files": [
+    "install.mjs",
+    "skills"
+  ]
+}
