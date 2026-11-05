@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "ForceEquals editor skills. Installs the governance skill into the current repository.",
+  "description": "ForceEquals editor skills. The governance scanner and the Code to Policy skill.",
   "bin": {
     "forceequals-skills": "./install.mjs"
   },
