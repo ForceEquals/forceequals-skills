@@ -70,6 +70,20 @@ Check the paths people forget: the `catch` or `except` block, the `else` or defa
 
 If the repository has its own gating mechanism — an internal approval service, a human-in-the-loop queue, a LangGraph `interrupt_before`, an n8n Wait node, a CrewAI `human_input` — **that counts as a control**. Name it in the finding and do not file the gap. You are looking for the absence of any control, not the absence of ForceEquals.
 
+**Momentum's own controls.** The `forceequals` package is a control. Do not open `site-packages`, `node_modules`, `.venv`, or `vendor` to learn it. Python calls are `fe.emit_event`, `fe.request_approval`, and `@fe.governed`. Node calls are `fe.emitEvent`, `fe.requestApproval`, and `fe.governed`. Do not list those calls under `unresolvedPaths` only because the implementation lives in the installed package.
+
+- `@fe.governed` or `fe.governed(fn)` starts one case. With the default lifecycle it emits `agent.turn.started` before the function body. A block on that emit raises `GovernanceBlockedError` and the function body does not run. The wrapper does not, by itself, stop some other send that sits inside the function before the first SDK call.
+- `fe.emit_event(name, data)` or `fe.emitEvent(name, data)` reports a fact. Policy runs on that call. A block raises `GovernanceBlockedError` before the caller continues. The fact is stored for the record, it is not shown on Feed, and it is not pushed. That is a policy control on the notice. A continue of a domain event can still appear on Feed. It does not wait for a person.
+- `fe.request_approval(...)` or `fe.requestApproval(...)` always pauses. In Python the next line runs only after Approve, and Reject raises `GovernanceRejectedError`. In Node the governed wrapper returns that error to the caller. Lines after the approval call do not run when the error is not caught and then continued.
+- An `except` or `catch` that swallows `GovernanceBlockedError` or `GovernanceRejectedError` and still performs the crossing is a bypass. File it as high.
+
+A notice sent before the approval call is judged from the repository.
+
+- If the notice is `emit_event` or `emitEvent` inside a governed function, policy can block it before anyone sees it. Mark that crossing governed. Do not file a gap, and do not list the path as unresolved.
+- If the notice is any other send (email, chat, webhook, a document comment, a ticket) and no code in this repository stops it before it leaves, it is its own crossing. The later approval does not cover it. File it under the boundary it actually crosses.
+
+Write each `unresolvedPaths` reason as one or two complete sentences. Do not stop mid-sentence.
+
 ## Step 4 — File one finding per action
 
 **One action, one finding.** An ungoverned refund is one gap, not five. Do not file separate findings for the missing approval, the missing case boundary, the missing event, and the missing record on the same action. List those inside the one finding as `missingControls`.
@@ -94,7 +108,7 @@ Severity describes consequence, not completeness. A missing audit record on an a
 This matters as much as the findings. Record in `coverage`:
 
 - `filesScanned`, and `filesSkipped` with reasons (generated, vendored, minified, unreadable)
-- `unresolvedPaths` — calls you could not follow: dynamic dispatch, a callable from a registry or dict, `eval`, reflection, a subprocess boundary, an external service whose behaviour is unknown
+- `unresolvedPaths`: calls you could not follow, such as dynamic dispatch, a callable from a registry or dict, `eval`, reflection, a subprocess boundary, or an external service whose behaviour is unknown. Do not use this list for a ForceEquals SDK call. Those are known controls. Each reason is one or two complete sentences.
 - `frameworksDetected`
 - `outOfScope` — consequential actions with no model or autonomous decision upstream
 
@@ -103,6 +117,8 @@ Never state that a repository is compliant, clean, or fully governed. The strong
 ## Output
 
 Write `governance-gaps.json` in the repository root. It is plain JSON a person can open. Do not lock it, do not encrypt it, and do not write a draft file. Do not run a seal script. Do not install or run the ForceEquals SDK.
+
+Record the revision you scanned. Read `git rev-parse HEAD` and `git rev-parse --abbrev-ref HEAD`. Put the full hash in `source.commit` and the branch name in `source.branch`. This reads the repository. It does not run the agent. Do not invent a hash. If those commands fail, leave both strings empty.
 
 **Do not include source code.** Record `file`, `startLine`, `endLine`, and `symbol` so the finding can be located, and describe what you saw in `evidence` in your own words. The user's source stays on the user's machine.
 
@@ -114,6 +130,7 @@ Also write a short readable summary to the chat: the headline count, the critica
 {
   "repo": "repository-name",
   "scannedAt": "2026-10-10T00:00:00.000Z",
+  "source": { "scannerVersion": "governance-gap-scanner 2.0", "commit": "4f1c0b2e8a9d47c6b1e0a3f5d7c9e2b4a6d8f0c1", "branch": "main" },
   "summary": "One sentence on what can happen with no person in the path.",
   "coverage": {
     "filesScanned": 0,
