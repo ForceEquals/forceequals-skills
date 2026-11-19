@@ -170,7 +170,7 @@ Write this file so a person can read it from top to bottom. Use the headings bel
 
 > **Draft this agent in Momentum**
 >
-> [Create drafted agent](https://planner.forceequals.ai/momentum/code-to-policy?name=Refund%20triage&purpose=Reads%20a%20refund%20ticket%20and%20sends%20the%20refund%20when%20the%20amount%20is%20within%20the%20daily%20cap.&framework=LangGraph&language=Python&entrypoint=src%2Fagent%2Fmain.py&kind=code&method=SDK)
+> [Create drafted agent](https://planner.forceequals.ai/momentum/policy-architect?name=Refund%20triage&purpose=Reads%20a%20refund%20ticket%20and%20sends%20the%20refund%20when%20the%20amount%20is%20within%20the%20daily%20cap.&framework=LangGraph&language=Python&entrypoint=src%2Fagent%2Fmain.py&kind=code&method=SDK)
 
 The same policies are in `policy-architect.json`, for Policy Studio.
 
@@ -194,7 +194,7 @@ Markdown rules:
 - The opening blockquote is the agent's name and what it decides. Two sentences at most.
 - The agent table uses the same facts as the JSON. `Kind` is "Code agent" or "No-code agent". `Method` is "SDK" or "Webhook".
 - The draft link is a real URL on one line, inside a blockquote, with the visible text **Create drafted agent**.
-- If the user's message names a Momentum address, build the link from that origin and the path `/momentum/code-to-policy`. If it does not, build the link from `https://planner.forceequals.ai/momentum/code-to-policy`. Do not copy the example host when the user named a different address.
+- If the user's message names a Momentum address, build the link from that origin and the path `/momentum/policy-architect`. If it does not, build the link from `https://planner.forceequals.ai/momentum/policy-architect`. Do not copy the example host when the user named a different address.
 - Query keys, in this order: `name`, `purpose`, `framework`, `language`, `entrypoint`, `kind`, `method`. Encode each value with URI encoding so spaces, `&`, and `#` cannot break the link. `purpose` is the same one or two sentences as `agent.purpose`. `kind` is `code` or `nocode`. `method` is `SDK` or `Webhook`.
 - Number the policies. **Route** is plain language: Human approval, Escalate, Reject, or Auto-approve. **Why** is one sentence from the logic, with no source listing.
 - **From** starts with a real `file:line` in backticks, then a short clause that names the logic on that line. If the condition and the action are different lines, cite the condition first and the action second. Do not quote the code.
@@ -215,7 +215,7 @@ Read both files against the trace. If a check fails, rewrite that part before yo
 - Neither file contains a cap number, a customer name, an email address, a secret, or a source listing.
 - Each **From** starts with a real `file:line` you re-read, and the clause describes that line. The JSON policy does not include that line.
 - Neither file contains a code review, an issue, or a fix prompt.
-- The draft link uses the Momentum address from the user's message when they gave one. Otherwise it uses `https://planner.forceequals.ai/momentum/code-to-policy`. The query keys are `name`, `purpose`, `framework`, `language`, `entrypoint`, `kind`, `method`, in that order, URI encoded.
+- The draft link uses the Momentum address from the user's message when they gave one. Otherwise it uses `https://planner.forceequals.ai/momentum/policy-architect`. The query keys are `name`, `purpose`, `framework`, `language`, `entrypoint`, `kind`, `method`, in that order, URI encoded.
 
 ## Finish
 

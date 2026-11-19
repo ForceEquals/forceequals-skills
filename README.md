@@ -22,24 +22,6 @@ The SDK is still installed separately. The skill does not need the SDK.
 
 `skills/governance-auditor/SKILL.md` is the governance skill. The scan writes a readable `governance-gaps.json`. It does not lock or encrypt that file.
 
-## Code to Policy
-
-Install the Code to Policy skill into the repository you have open:
-
-```bash
-npx skills add ForceEquals/forceequals-skills --skill code-to-policy -y
-```
-
-Already installed:
-
-```bash
-npx skills update code-to-policy -y
-```
-
-That copies `skills/code-to-policy/SKILL.md` the same way as the governance skill.
-
-The skill writes two files at the repository root. `code-to-policy.md` explains the agent and its policies in plain language, links to a drafted agent in Momentum, and includes a prompt for each code issue plus one prompt for all of them. `code-to-policies.json` holds the agent and the policies only. Upload that JSON in Momentum under Tools, Code to Policy. The policies are saved in Policy Studio on the drafted agent.
-
 ## Policy Architect
 
 Install the Policy Architect skill into the repository you have open:

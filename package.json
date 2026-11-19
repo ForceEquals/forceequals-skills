@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "ForceEquals editor skills. The governance scanner, the Code to Policy skill, and the Policy Architect skill.",
+  "description": "ForceEquals editor skills. The governance auditor and the Policy Architect skill.",
   "bin": {
     "forceequals-skills": "./install.mjs"
   },
