@@ -1,15 +1,15 @@
 ---
-name: governance-gap-scanner
+name: governance-auditor
 description: >-
   Scans the open repository for agent governance gaps and writes
-  governance-gaps.json for the ForceEquals Momentum Governance Scanner. Use when
-  the user says "Run the governance scanner", or asks for a governance scan,
+  governance-gaps.json for the ForceEquals Momentum Governance Auditor. Use when
+  the user says "Run the governance auditor", or "Run the governance scanner", or asks for a governance scan,
   governance gaps, missing approvals, or a JSON file to upload in Momentum.
 ---
 
 # Agent governance scan
 
-When the user says "Run the governance scanner", or asks for a governance scan, scan the open repository and write `governance-gaps.json`. The user's message may be only that one line. These rules are the whole scan. Do not ask for a longer prompt.
+When the user says "Run the governance auditor", or "Run the governance scanner", or asks for a governance scan, scan the open repository and write `governance-gaps.json`. The user's message may be only that one line. These rules are the whole scan. Do not ask for a longer prompt.
 
 Do not call the ForceEquals API. Do not change application code while scanning. Do not install anything.
 
@@ -124,13 +124,13 @@ Record the revision you scanned. Read `git rev-parse HEAD` and `git rev-parse --
 
 Only if the user explicitly asks for code to be included ("include the code", "include snippets") add a `code` field to each finding and set `"includesSource": true` at the top level.
 
-Also write a short readable summary to the chat: the headline count, the critical findings, and the coverage line. Do not paste the whole file into the chat. Then tell the user the file path, and that it uploads in Momentum under Governance Scanner for the full report, the policy pack, and the Policy Studio import.
+Also write a short readable summary to the chat: the headline count, the critical findings, and the coverage line. Do not paste the whole file into the chat. Then tell the user the file path, and that it uploads in Momentum under Governance Auditor for the full report, the policy pack, and the Policy Studio import.
 
 ```json
 {
   "repo": "repository-name",
   "scannedAt": "2026-10-10T00:00:00.000Z",
-  "source": { "scannerVersion": "governance-gap-scanner 2.0", "commit": "4f1c0b2e8a9d47c6b1e0a3f5d7c9e2b4a6d8f0c1", "branch": "main" },
+  "source": { "scannerVersion": "governance-auditor 2.0", "commit": "4f1c0b2e8a9d47c6b1e0a3f5d7c9e2b4a6d8f0c1", "branch": "main" },
   "summary": "One sentence on what can happen with no person in the path.",
   "coverage": {
     "filesScanned": 0,
