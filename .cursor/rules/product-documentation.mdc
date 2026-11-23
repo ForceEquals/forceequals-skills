@@ -1,0 +1,157 @@
+---
+description: Standardize product-facing GitHub Pull Request descriptions and sales enablement documentation. Apply whenever implementing, modifying, reviewing, or preparing a PR for customer-facing product functionality.
+alwaysApply: false
+---
+
+# Product Documentation & PR Standards
+
+## Objective
+
+Every customer-facing product change must be documented in a way that helps the Sales and Product teams understand what changed, how it works, and why customers should care.
+
+GitHub PR descriptions are consumed by an automated agent that converts them into Google Docs for the Sales team.
+
+The quality and consistency of PR descriptions are therefore important.
+
+## 1. When Implementing Product Changes
+
+Whenever you implement or modify a customer-facing feature:
+
+- Identify all meaningful product changes introduced.
+- Group related changes by product module or functional area.
+- Explain functionality from the end user's perspective.
+- Describe the customer problem being solved.
+- Identify relevant sales demonstration opportunities.
+- Preserve technical accuracy.
+- Do not exaggerate or invent capabilities.
+
+Do not wait until the end of development to understand what needs documenting.
+
+## 2. Product Change Naming Convention
+
+Use the following format:
+
+**[Product Area] Change Title**
+
+Examples:
+
+- [Momentum Onboarding] Interactive Product Tour
+- [Momentum AI] Agent Blueprint Governance Analysis
+- [Momentum Feature] Agent Activity Filtering
+- [Momentum UX] Consistent Agent & Feed Cards
+- [Momentum Monetization] Agent Seat Payment Deployment
+
+## 3. Change Categories
+
+Use appropriate categories:
+
+- Feature: New user-facing functionality.
+- AI: AI-powered functionality and intelligence.
+- UX: User experience and interface improvements.
+- Onboarding: Product onboarding and guided tours.
+- Governance: Policies, compliance and guardrails.
+- Integration: Third-party integrations.
+- Monetization: Payments and subscriptions.
+- Bug Fix: Customer-facing defect resolution.
+- Performance: Speed and reliability improvements.
+- Security: Authentication and security improvements.
+
+## 4. Mandatory PR Description Structure
+
+When preparing a GitHub PR, use this structure:
+
+# [Product] – [PR Title]
+
+## 1. Overview
+Explain the overall purpose and scope of the changes in 2–4 sentences.
+
+## 2. Product Changes
+
+Group changes under relevant product modules.
+
+For every meaningful change, use:
+
+- **[Product Area] Change Title**
+  - Explain what was introduced, modified or fixed.
+  - Explain how the functionality works from the user's perspective.
+  - Include relevant user-facing improvements.
+
+Do not combine unrelated features into one bullet.
+
+## 3. Customer Impact
+
+Explain the actual customer benefits.
+
+Include relevant improvements to:
+- Productivity
+- Visibility
+- Governance
+- Automation
+- Efficiency
+- User experience
+
+Only include benefits supported by the implementation.
+
+## 4. Sales & Product Enablement
+
+- What Sales Should Know
+- Demo Opportunity
+- Customer-facing Talking Points
+
+Do not invent demo capabilities or claim functionality that has not been implemented.
+
+## 5. Screenshots / Demo References
+
+Include relevant screenshots, videos, URLs or documentation where available.
+
+## 6. Deployment & Availability
+
+- Release Status
+- Availability
+- Feature Flag Requirements
+- Dependencies or Limitations
+
+If information is unknown, explicitly mark it as TBD.
+
+## 7. Additional Notes
+
+Include breaking changes, known issues, migration requirements or other relevant information.
+
+## 5. Writing Standards
+
+- Use professional, concise and clear language.
+- Write in past tense for completed functionality.
+- Focus on what users can now do.
+- Avoid unnecessary engineering terminology.
+- Explain technical functionality in business-friendly language.
+- Avoid vague statements such as "improved functionality" or "fixed some issues".
+- Do not document internal refactoring as a customer-facing feature.
+- Do not claim a feature is deployed unless deployment is confirmed.
+
+## 6. PR Generation Instructions
+
+When the developer asks to create or prepare a PR:
+
+1. Inspect the actual code changes and relevant implementation.
+2. Identify all meaningful product-facing changes.
+3. Group related changes by product module.
+4. Generate the PR description using the mandatory structure.
+5. Ensure the description accurately represents the implemented changes.
+6. Include screenshots or references only when actually available.
+7. Identify missing information rather than making assumptions.
+
+If a PR contains only infrastructure, refactoring, internal tooling or non-customer-facing changes, clearly identify it as an internal engineering change.
+
+## 7. Final Quality Check
+
+Before presenting a PR description, verify:
+
+- Every meaningful customer-facing change is documented.
+- No functionality has been invented.
+- Product terminology is consistent.
+- Related changes are grouped together.
+- Customer impact is understandable.
+- Sales can understand what to demonstrate.
+- Deployment status is not assumed.
+
+The final PR description must be ready to paste into GitHub without additional restructuring.
